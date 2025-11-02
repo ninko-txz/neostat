@@ -3,20 +3,20 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="/static/counter-view.css" rel="stylesheet" />
+        <link href="/static/neostat.css" rel="stylesheet" />
         <title>Neostat</title>
     </head>
     <body>
         <table>
             <thead>
-                <th>id</th>
-                <th>name</th>
-                <th>date</th>
-                <th>addr</th>
-                <th>forward</th>
-                <th>agent</th>
-                <th>langs</th>
-                <th>ref</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Timestamp</th>
+                <th>XForwardedFor</th>
+                <th>Country</th>
+                <th>UserAgent</th>
+                <th>Languages</th>
+                <th>Referrer</th>
             </thead>
             <tbody>
                 {% for log in logs %}
@@ -24,8 +24,8 @@
                     <td>{{ log.id }}</td>
                     <td>{{ log.page_name }}</td>
                     <td>{{ log.created_at }}</td>
-                    <td>{{ log.remote_addr }}</td>
                     <td>{{ log.x_forwarded }}</td>
+                    <td>{{ log.country }}</td>
                     <td>{{ log.user_agent }}</td>
                     <td>{{ log.languages }}</td>
                     <td>{{ log.referrer }}</td>

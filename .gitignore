@@ -4,3 +4,4 @@ __pycache__
 
 # neostat
 neostat.db
+geolite.mmdb

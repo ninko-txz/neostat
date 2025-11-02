@@ -35,5 +35,5 @@ def count_up(log):
 def count_view():
     sql = read_sql("./sql/count-view.sql")
     values = execute_sql(sql, fetch=True)
-    keys = ["id", "page_name", "created_at", "remote_addr", "x_forwarded", "user_agent", "languages", "referrer"]
+    keys = ["id", "page_name", "created_at", "x_forwarded", "country", "user_agent", "languages", "referrer"]
     return [dict(zip(keys, row)) for row in values]
