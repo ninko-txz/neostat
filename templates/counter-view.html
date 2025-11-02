@@ -13,6 +13,7 @@
                 <th>name</th>
                 <th>date</th>
                 <th>addr</th>
+                <th>forward</th>
                 <th>agent</th>
                 <th>langs</th>
                 <th>ref</th>
@@ -24,6 +25,7 @@
                     <td>{{ log.page_name }}</td>
                     <td>{{ log.created_at }}</td>
                     <td>{{ log.remote_addr }}</td>
+                    <td>{{ log.x_forwarded }}</td>
                     <td>{{ log.user_agent }}</td>
                     <td>{{ log.languages }}</td>
                     <td>{{ log.referrer }}</td>

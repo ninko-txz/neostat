@@ -18,6 +18,7 @@ def neocities_count_up(page_name):
         "page_name": page_name,
         "created_at": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
         "remote_addr": request.remote_addr,
+        "x_forwarded": request.headers.get("X-Forwarded-For"),
         "user_agent": request.user_agent.string,
         "languages": request.headers.get("Accept-Language"),
         "referrer": request.referrer,
