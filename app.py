@@ -14,7 +14,7 @@ db.create_table()
 CORS(app, origins=os.getenv("NEOCITIES_ORIGIN", "*"))
 
 
-@app.route("/<path:page_name>/beacon.js")
+@app.route("/<path:page_name>/neostat.js")
 def neocities_count_up(page_name):
     x_forwarded = request.headers.get("X-Forwarded-For")
 
@@ -29,7 +29,7 @@ def neocities_count_up(page_name):
     }
     db.count_up(log)
 
-    return Response("", mimetype="application/javascript")
+    return Response('"use strict";', mimetype="application/javascript")
 
 
 @app.route("/neostat")
