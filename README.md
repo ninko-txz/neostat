@@ -1,6 +1,11 @@
 # Neostat
 
-Webサイトのアクセスカウンターです。
+Web サイトのアクセスカウンターです。
+
+## 特徴
+
+管理画面にログインしたことのあるブラウザからのアクセスは無視するので、
+純粋なユーザーからのアクセス数だけをカウントすることができます。
 
 ## 開発環境
 
@@ -11,10 +16,21 @@ $ cd neostat
 $ pip install -r requirements.txt
 
 # サーバー起動
-$ export NEOCITIES_ORIGIN=https://ninko.neocities.org
+$ export NEOSTAT_USERNAME=neostat
+$ export NEOSTAT_PASSWORD=neostat
+$ export NEOSTAT_TOKEN=neostat
+$ export NEOSTAT_CORS=https://ninko.neocities.org
 $ flask run --debug
+
+# 管理画面を開く
+http://localhost:5000/neostat
 ```
 
-## 備考
+## デフォルト値
 
--   NEOCITIES_ORIGIN が設定されていない場合、全てのオリジンを許可します
+| Name             | Value    |
+| ---------------- | -------- |
+| NEOSTAT_USERNAME | admin    |
+| NEOSTAT_PASSWORD | password |
+| NEOSTAT_TOKEN    | neostat  |
+| NEOSTAT_CORS     | \*       |
