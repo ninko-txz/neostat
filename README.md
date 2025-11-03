@@ -34,3 +34,7 @@ http://localhost:5000/neostat
 | NEOSTAT_PASSWORD | password |
 | NEOSTAT_TOKEN    | neostat  |
 | NEOSTAT_CORS     | \*       |
+
+## 備考
+
+-   認証済みブラウザによるアクセスカウントを回避するにはブラウザ側で 3rd パーティ製の Cookie が許可されている必要があります。
