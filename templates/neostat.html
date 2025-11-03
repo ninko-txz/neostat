@@ -10,9 +10,9 @@
         <table>
             <thead>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Timestamp</th>
-                <th>XForwardedFor</th>
+                <th>Timestamp (JST)</th>
+                <th>Page</th>
+                <th>Address</th>
                 <th>Country</th>
                 <th>UserAgent</th>
                 <th>Languages</th>
@@ -22,8 +22,8 @@
                 {% for log in logs %}
                 <tr>
                     <td>{{ log.id }}</td>
-                    <td>{{ log.page_name }}</td>
                     <td>{{ log.created_at }}</td>
+                    <td>{{ log.page_name }}</td>
                     <td>{{ log.x_forwarded }}</td>
                     <td>{{ log.country }}</td>
                     <td>{{ log.user_agent }}</td>

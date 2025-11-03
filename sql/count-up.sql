@@ -1,2 +1,2 @@
-INSERT INTO count (page_name, created_at, x_forwarded, country, user_agent, languages, referrer)
-VALUES ('{page_name}', '{created_at}', "{x_forwarded}", "{country}", '{user_agent}', '{languages}', '{referrer}');
+INSERT INTO count (created_at, page_name, x_forwarded, country, user_agent, languages, referrer)
+VALUES ('{created_at}', '{page_name}', "{x_forwarded}", "{country}", '{user_agent}', '{languages}', '{referrer}');

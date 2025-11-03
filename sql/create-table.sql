@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS count (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    page_name TEXT,
     created_at TEXT,
+    page_name TEXT,
     x_forwarded TEXT,
     country TEXT,
     user_agent TEXT,

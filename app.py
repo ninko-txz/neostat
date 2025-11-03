@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 from flask import Flask, Response, render_template, request
 from flask_cors import CORS
@@ -19,8 +19,8 @@ def neocities_count_up(page_name):
     x_forwarded = request.headers.get("X-Forwarded-For")
 
     log = {
+        "created_at": now(),
         "page_name": page_name,
-        "created_at": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
         "x_forwarded": x_forwarded,
         "country": None if x_forwarded is None else get_country(x_forwarded),
         "user_agent": request.user_agent.string,
@@ -45,3 +45,9 @@ def get_country(ip):
 
     except AddressNotFoundError:
         return None
+
+
+def now():
+    utc_now = datetime.now(timezone.utc)
+    jst_now = utc_now + timedelta(hours=9)
+    return jst_now.strftime("%Y-%m-%d %H:%M:%S")
