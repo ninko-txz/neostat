@@ -27,9 +27,14 @@ def neocities_count_up(page_name):
         "languages": request.headers.get("Accept-Language"),
         "referrer": request.referrer,
     }
+
     db.count_up(log)
 
-    return Response('"use strict";', mimetype="application/javascript")
+    response = Response('"use strict";', mimetype="application/javascript")
+    response.cache_control.no_store = True
+    response.cache_control.must_revalidate = True
+
+    return response
 
 
 @app.route("/neostat")
