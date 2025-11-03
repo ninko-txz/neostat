@@ -40,7 +40,9 @@ def neostat():
 
     if auth.username == AUTH_USERNAME and auth.password == AUTH_PASSWORD:
         response = Response(render_template("neostat.html", logs=db.count_view()))
-        response.set_cookie("neostat-auth-token", AUTH_TOKEN, max_age=60 * 60 * 24 * 365 * 10)
+        response.set_cookie(
+            "neostat-auth-token", AUTH_TOKEN, max_age=60 * 60 * 24 * 365 * 10, samesite="None", secure=True
+        )
         return response
 
     else:
