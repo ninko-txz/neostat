@@ -11,24 +11,22 @@
             <thead>
                 <th>Id</th>
                 <th>Timestamp (JST)</th>
-                <th>Page</th>
+                <th>Path</th>
                 <th>Address</th>
                 <th>Country</th>
                 <th>UserAgent</th>
                 <th>Languages</th>
-                <th>Referrer</th>
             </thead>
             <tbody>
                 {% for log in logs %}
                 <tr>
                     <td>{{ log.id }}</td>
                     <td>{{ log.created_at }}</td>
-                    <td>{{ log.page_name }}</td>
+                    <td>{{ log.path }}</td>
                     <td>{{ log.x_forwarded }}</td>
                     <td>{{ log.country }}</td>
                     <td>{{ log.user_agent }}</td>
                     <td>{{ log.languages }}</td>
-                    <td>{{ log.referrer }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

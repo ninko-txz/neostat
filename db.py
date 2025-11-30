@@ -23,17 +23,17 @@ def execute_sql(sql, fetch=False):
 
 
 def create_table():
-    sql = read_sql("./sql/create-table.sql")
+    sql = read_sql("./sql/create_table.sql")
     execute_sql(sql)
 
 
 def count_up(log):
-    sql = read_sql("./sql/count-up.sql")
+    sql = read_sql("./sql/count_up.sql")
     execute_sql(sql.format(**log))
 
 
 def count_view():
-    sql = read_sql("./sql/count-view.sql")
+    sql = read_sql("./sql/count_view.sql")
     values = execute_sql(sql, fetch=True)
-    keys = ["id", "created_at", "page_name", "x_forwarded", "country", "user_agent", "languages", "referrer"]
+    keys = ["id", "created_at", "path", "x_forwarded", "country", "user_agent", "languages", "referrer"]
     return [dict(zip(keys, row)) for row in values]

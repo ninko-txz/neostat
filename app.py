@@ -8,29 +8,38 @@ from geoip2.errors import AddressNotFoundError
 
 import db
 
-app = Flask(__name__)
-
-db.create_table()
-
 AUTH_USERNAME = os.getenv("NEOSTAT_USERNAME", "admin")
 AUTH_PASSWORD = os.getenv("NEOSTAT_PASSWORD", "password")
 AUTH_TOKEN = os.getenv("NEOSTAT_TOKEN", "neostat")
-CORS(app, origins=os.getenv("NEOSTAT_CORS", "*"))
+
+GEOLOCATION = os.getenv("NEOSTAT_GEOLOCATION") is not None
+REFERRER = ORIGIN = os.getenv("NEOSTAT_ORIGIN")
+
+db.create_table()
+
+app = Flask(__name__)
+
+# CORS制限有効化
+CORS(app, origins=ORIGIN)
 
 
-@app.route("/<path:page_name>/neostat.js")
-def neostat_count_up(page_name):
-    if request.cookies.get("neostat-auth-token") != AUTH_TOKEN:
-        count_up(page_name, request)
+@app.route("/beacon/<path:url_path>.js")
+def neostat_count_up(url_path):
+    if includes("ignore_ua.txt", request.user_agent.string):
+        return build_response()
 
-    response = Response('"use strict";', mimetype="application/javascript")
-    response.cache_control.no_store = True
-    response.cache_control.must_revalidate = True
+    if request.referrer != REFERRER:
+        return build_response()
 
-    return response
+    if request.cookies.get("neostat-auth-token") == AUTH_TOKEN:
+        return build_response()
+
+    count_up(url_path, request)
+
+    return build_response()
 
 
-@app.route("/neostat")
+@app.route("/admin")
 def neostat():
     auth = request.authorization
 
@@ -50,17 +59,16 @@ def neostat():
         return response
 
 
-def count_up(page_name, request):
+def count_up(url_path, request):
     x_forwarded = request.headers.get("X-Forwarded-For")
 
     log = {
         "created_at": now(),
-        "page_name": page_name,
+        "path": url_path,
         "x_forwarded": x_forwarded,
         "country": None if x_forwarded is None else get_country(x_forwarded),
         "user_agent": request.user_agent.string,
         "languages": request.headers.get("Accept-Language"),
-        "referrer": request.referrer,
     }
 
     db.count_up(log)
@@ -79,3 +87,20 @@ def now():
     utc_now = datetime.now(timezone.utc)
     jst_now = utc_now + timedelta(hours=9)
     return jst_now.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def includes(file, string):
+    with open(file, "r") as f:
+        for line in f:
+            if line == string:
+                return True
+        return False
+
+
+def build_response():
+    response = Response('"use strict";', mimetype="application/javascript")
+
+    response.cache_control.no_store = True
+    response.cache_control.must_revalidate = True
+
+    return response
