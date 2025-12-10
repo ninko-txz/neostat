@@ -5,7 +5,7 @@ ADMIN_CONSOLE = """
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    table { border-spacing: .5rem }
+    table { border-spacing: 1rem }
     th { text-align: left }
     </style>
     <title>Neostat</title>
@@ -17,7 +17,7 @@ ADMIN_CONSOLE = """
             <th>Timestamp</th>
             <th>Path</th>
             <th>Address</th>
-            <th>UserAgent</th>
+            <th>User Agent</th>
             <th>Language</th>
         </tr>
 
@@ -32,6 +32,14 @@ ADMIN_CONSOLE = """
         </tr>
         {% endfor %}
     </table>
+    <script>
+        document.querySelectorAll("tr:has(td)").forEach(tr => {
+            const col = tr.querySelector("td:nth-child(2)");
+            const epochtime = col.textContent;
+            const date = new Date(epochtime * 1000);
+            col.textContent = date.toLocaleString();
+        })
+    </script>
 </body>
 </html>
 """
