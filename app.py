@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route("/beacon/<path:path>.js")
 def beacon(path):
-    if request.user_agent in settings.IGNORE_USER_AGENTS:
+    if request.user_agent.string in settings.IGNORE_USER_AGENTS:
         return empty_js()
 
     if request.referrer != settings.ALLOWED_REFERRER:
