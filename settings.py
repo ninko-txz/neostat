@@ -13,6 +13,4 @@ BASIC_PASSWORD = os.getenv("NS_BASIC_PASSWORD", "password")
 COOKIE_NAME = os.getenv("NS_COOKIE_NAME", "neostat")
 COOKIE_VALUE = os.getenv("NS_COOKIE_VALUE", "neostat")
 
-ALLOWED_REFERRER = os.getenv("NS_ALLOWED_REFERRER")
-
 IGNORE_USER_AGENTS = ["Screenjesus"]

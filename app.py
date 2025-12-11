@@ -14,18 +14,16 @@ def beacon(path):
     if request.user_agent.string in settings.IGNORE_USER_AGENTS:
         return empty_js()
 
-    if request.referrer != settings.ALLOWED_REFERRER:
-        return empty_js()
-
     if request.cookies.get(settings.COOKIE_NAME) == settings.COOKIE_VALUE:
         return empty_js()
 
     created_at = int(time.time())
     x_forwarded = request.headers.get("X-Forwarded-For")
-    user_agent = request.user_agent.string
+    user_agent = request.user_agent.string[0:255] if request.user_agent.string is not None else None
     languages = request.headers.get("Accept-Language")
+    referrer = request.referrer[0:128] if request.referrer is not None else None
 
-    db.save_access_log(created_at, path, x_forwarded, user_agent, languages)
+    db.save_access_log(created_at, path[0:128], x_forwarded, user_agent, languages, referrer)
 
     return empty_js()
 

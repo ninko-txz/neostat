@@ -12,7 +12,7 @@ def get_access_log():
         cursor = conn.cursor(dictionary=True)
 
         sql = """
-            SELECT id, created_at, path, x_forwarded, user_agent, languages
+            SELECT id, created_at, path, x_forwarded, user_agent, languages, referrer
             FROM access_logs 
             ORDER BY created_at DESC
         """
@@ -27,7 +27,7 @@ def get_access_log():
             conn.close()
 
 
-def save_access_log(created_at, path, x_forwarded, user_agent, languages):
+def save_access_log(*values):
     conn = None
     cursor = None
 
@@ -37,10 +37,10 @@ def save_access_log(created_at, path, x_forwarded, user_agent, languages):
 
         sql = """
             INSERT INTO access_logs 
-            (created_at, path, x_forwarded, user_agent, languages)
-            VALUES (%s, %s, %s, %s, %s)
+            (created_at, path, x_forwarded, user_agent, languages, referrer)
+            VALUES (%s, %s, %s, %s, %s, %s)
         """
-        cursor.execute(sql, (created_at, path, x_forwarded, user_agent, languages))
+        cursor.execute(sql, values)
         conn.commit()
 
     finally:

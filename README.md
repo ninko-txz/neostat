@@ -28,6 +28,7 @@ CREATE TABLE access_logs (
     x_forwarded VARCHAR(64),
     user_agent VARCHAR(255),
     languages VARCHAR(128),
+    referrer VARCHAR(128),
     INDEX (created_at)
 )
 ```
@@ -41,29 +42,20 @@ $ pip install -r requirements.txt
 $ flask run --debug
 ```
 
-## 任意の Referrer からのアクセスのみをカウントしたい場合
-
-環境変数 NS_ALLOWED_REFERRER に Referrer の名をセットしてください。
-
-```
-NS_ALLOWED_REFERRER=http://example.com
-```
-
-## 任意の UserAgent を無視したい場合
+## 任意の UserAgent からのアクセスを無視したい場合
 
 settings.py の IGNORE_USER_AGENTS に UserAgent 名を追記してください。
 (デフォルトでは Screenjesus のみが無視されます)
 
 ## 環境変数一覧
 
-| Name                | DefaultValue |
-| ------------------- | ------------ |
-| NS_MYSQL_USERNAME   | root         |
-| NS_MYSQL_PASSWORD   | neostat      |
-| NS_MYSQL_HOST       | 127.0.0.1    |
-| NS_MYSQL_DB         | neostat      |
-| NS_BASIC_USERNAME   | admin        |
-| NS_BASIC_PASSWORD   | password     |
-| NS_COOKIE_NAME      | neostat      |
-| NS_COOKIE_VALUE     | neostat      |
-| NS_ALLOWED_REFERRER | None         |
+| Name              | DefaultValue |
+| ----------------- | ------------ |
+| NS_MYSQL_USERNAME | root         |
+| NS_MYSQL_PASSWORD | neostat      |
+| NS_MYSQL_HOST     | 127.0.0.1    |
+| NS_MYSQL_DB       | neostat      |
+| NS_BASIC_USERNAME | admin        |
+| NS_BASIC_PASSWORD | password     |
+| NS_COOKIE_NAME    | neostat      |
+| NS_COOKIE_VALUE   | neostat      |

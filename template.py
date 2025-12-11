@@ -19,6 +19,7 @@ ADMIN_CONSOLE = """
             <th>Address</th>
             <th>User Agent</th>
             <th>Language</th>
+            <th>Referrer</th>
         </tr>
 
         {% for log in access_logs %}
@@ -29,6 +30,7 @@ ADMIN_CONSOLE = """
             <td>{{ log.x_forwarded }}</td>
             <td>{{ log.user_agent }}</td>
             <td>{{ log.languages }}</td>
+            <td>{{ log.referrer }}</td>
         </tr>
         {% endfor %}
     </table>
