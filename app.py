@@ -43,7 +43,7 @@ def admin():
 
         response = Response(html)
         response.set_cookie(
-            settings.COOKIE_NAME, settings.COOKIE_NAME, max_age=60 * 60 * 24 * 365 * 10, samesite="None", secure=True
+            settings.COOKIE_NAME, settings.COOKIE_VALUE, max_age=60 * 60 * 24 * 365 * 10, samesite="None", secure=True
         )
         return response
 
